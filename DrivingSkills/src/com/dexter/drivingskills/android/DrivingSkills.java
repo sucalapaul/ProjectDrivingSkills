@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.example.android.BluetoothChat;
+package com.dexter.drivingskills.android;
 
 import com.dexter.drivingskills.api.commands.engine.EngineRPMObdCommand;
 import com.dexter.drivingskills.api.commands.engine.ThrottlePositionObdCommand;
@@ -24,6 +24,7 @@ import com.dexter.drivingskills.api.commands.protocol.ObdResetCommand;
 import com.dexter.drivingskills.api.commands.protocol.SelectProtocolObdCommand;
 import com.dexter.drivingskills.api.commands.protocol.TimeoutObdCommand;
 import com.dexter.drivingskills.api.enums.ObdProtocols;
+import com.dexter.drivingskills.android.R;
 
 import android.app.Activity;
 import android.bluetooth.BluetoothAdapter;
@@ -51,9 +52,9 @@ import android.widget.Toast;
 /**
  * This is the main Activity that displays the current chat session.
  */
-public class BluetoothChat extends Activity {
+public class DrivingSkills extends Activity {
     // Debugging
-    private static final String TAG = "BluetoothChat";
+    private static final String TAG = "DrivingSkills";
     private static final boolean D = true;
 
     // Message types sent from the BluetoothChatService Handler
@@ -389,6 +390,10 @@ public class BluetoothChat extends Activity {
             Intent serverIntent = new Intent(this, DeviceListActivity.class);
             startActivityForResult(serverIntent, REQUEST_CONNECT_DEVICE);
             return true;
+        case R.id.parameters:
+        	Intent carParametersIntent = new Intent(this, CarParametersActivity.class);
+        	startActivity(carParametersIntent);
+        	return true;
         case R.id.discoverable:
             // Ensure this device is discoverable by others
             ensureDiscoverable();

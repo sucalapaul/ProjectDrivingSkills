@@ -1,4 +1,4 @@
-package com.example.android.BluetoothChat;
+package com.dexter.drivingskills.android;
 
 /*
  * TODO put header

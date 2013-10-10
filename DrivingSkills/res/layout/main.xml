@@ -26,27 +26,34 @@
         android:transcriptMode="alwaysScroll"
         android:layout_weight="1"
     />
+
     <LinearLayout
-        android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        >
-        <Button android:id="@+id/button_1"
-            android:layout_width="wrap_content"
+        android:orientation="horizontal" >
+
+        <Button
+            android:id="@+id/button_1"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:text="test"
-        />
-        <Button android:id="@+id/button_2"
-            android:layout_width="wrap_content"
+            android:layout_weight="1"
+            android:text="test" />
+
+        <Button
+            android:id="@+id/button_2"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:text="test"
-        />
-        <Button android:id="@+id/button_3"
-            android:layout_width="wrap_content"
+            android:layout_weight="1"
+            android:text="test" />
+
+        <Button
+            android:id="@+id/button_3"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:text="test"
-        />
+            android:layout_weight="1"
+            android:text="test" />
     </LinearLayout>
+
     <LinearLayout
         android:orientation="horizontal"
         android:layout_width="match_parent"

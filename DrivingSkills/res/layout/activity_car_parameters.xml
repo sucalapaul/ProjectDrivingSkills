@@ -1,0 +1,203 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center_horizontal"
+    android:orientation="vertical"
+    tools:context=".CarParametersActivity" >
+
+    <!-- Speed -->
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:paddingBottom="10dp"
+        android:paddingTop="10dp" >
+
+        <TextView
+            android:id="@+id/speed"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/speed"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:textColor="@color/bigText"
+            android:textSize="80sp" />
+
+        <TextView
+            android:id="@+id/label_speed"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/label_speed"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:textColor="@color/smallText"
+            android:textSize="30sp" />
+    </LinearLayout>
+
+    <!-- Line -->
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="1dp"
+        android:background="#ffffff"
+        android:gravity="center_horizontal" >
+    </LinearLayout>
+
+    <!-- RPM and Gear -->
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:baselineAligned="false"
+        android:gravity="center_horizontal"
+        android:paddingBottom="10dp"
+        android:paddingLeft="20dp"
+        android:paddingTop="10dp" >
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="2" >
+
+            <TextView
+                android:id="@+id/rpm"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/rpm"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:textColor="@color/bigText"
+                android:textSize="50sp" />
+
+            <TextView
+                android:id="@+id/label_rpm"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/label_rpm"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:textColor="@color/smallText"
+                android:textSize="20sp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1" >
+
+            <TextView
+                android:id="@+id/gear"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/gear"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:textColor="@color/bigText"
+                android:textSize="50sp" />
+
+            <TextView
+                android:id="@+id/label_gear"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/label_gear"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:textColor="@color/smallText"
+                android:textSize="20sp" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <!-- Throttle and Acceleration -->
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:baselineAligned="false"
+        android:gravity="center_horizontal"
+        android:paddingBottom="10dp"
+        android:paddingLeft="20dp" >
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="2" >
+
+            <TextView
+                android:id="@+id/throttle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/throttle"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:textColor="@color/bigText"
+                android:textSize="50sp" />
+
+            <TextView
+                android:id="@+id/label_throttle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/label_throttle"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:textColor="@color/smallText"
+                android:textSize="20sp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1" >
+
+            <TextView
+                android:id="@+id/acceleration"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/acceleration"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:textColor="@color/bigText"
+                android:textSize="50sp" />
+
+            <TextView
+                android:id="@+id/label_acceleration"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/label_acceleration"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:textColor="@color/smallText"
+                android:textSize="20sp" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <!-- Line -->
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="1dp"
+        android:background="#ffffff"
+        android:gravity="center_horizontal" >
+    </LinearLayout>
+
+    <!-- Road type -->
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:baselineAligned="false"
+        android:gravity="left"
+        android:orientation="vertical"
+        android:paddingLeft="20dp"
+        android:paddingTop="10dp" >
+
+        <TextView
+            android:id="@+id/road_type"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/road_type"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:textColor="@color/smallText"
+            android:textSize="30sp" />
+
+        <TextView
+            android:id="@+id/driving_type"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/driving_type"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:textColor="@color/smallText"
+            android:textSize="30sp" />
+    </LinearLayout>
+
+</LinearLayout>
