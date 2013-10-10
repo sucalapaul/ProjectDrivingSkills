@@ -16,7 +16,6 @@
 
 package com.dexter.drivingskills.android;
 
-import com.dexter.drivingskills.api.commands.engine.EngineRPMObdCommand;
 import com.dexter.drivingskills.api.commands.engine.ThrottlePositionObdCommand;
 import com.dexter.drivingskills.api.commands.protocol.EchoOffObdCommand;
 import com.dexter.drivingskills.api.commands.protocol.LineFeedOffObdCommand;
