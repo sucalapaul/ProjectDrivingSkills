@@ -39,5 +39,19 @@ public abstract class PercentageObdCommand extends ObdCommand {
 
 		return res;
 	}
+	
+	public double getParsedResult() {
+		String res = getResult();
+		
+		if (!"NODATA".equals(res)) {
+			// ignore first two bytes [hh hh] of the response
+			double tempValue = (buffer.get(2) * 100.0) / 255.0;
+			return tempValue;
+		}
+		else
+		{
+			return -1;
+		}
+	}
 
 }

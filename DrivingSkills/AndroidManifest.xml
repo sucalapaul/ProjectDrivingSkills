@@ -16,6 +16,7 @@
 -->
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.dexter.drivingskills.android"
+    android:installLocation="internalOnly"
     android:versionCode="1"
     android:versionName="1.0" >
 
@@ -25,6 +26,7 @@
 
     <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
     <uses-permission android:name="android.permission.BLUETOOTH" />
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
 
     <application
         android:icon="@drawable/app_icon"
@@ -51,6 +53,12 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.example.android.BluetoothChat.BluetoothChat" />
         </activity>
+
+        <receiver android:name="com.dexter.drivingskills.android.StartupBroadcastReceiver" >
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
+            </intent-filter>
+        </receiver>
     </application>
 
 </manifest>

@@ -48,6 +48,20 @@ public class SpeedObdCommand extends ObdCommand implements SystemOfUnits {
 
 		return res;
 	}
+	
+	public int getParsedResult() {
+		String res = getResult();
+
+		if (!"NODATA".equals(res)) {
+			//Ignore first two bytes [hh hh] of the response.
+			metricSpeed = buffer.get(2);
+		}
+		else 
+		{
+			metricSpeed = -1;
+		}
+		return metricSpeed;
+	}
 
 	/**
 	 * @return the speed in metric units.

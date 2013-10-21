@@ -30,18 +30,30 @@ public class EngineRPMObdCommand extends ObdCommand {
 	}
 
 	/**
-	 * @return the engine RPM per minute
+	 * @return the engine RPM, string format: "Value RPM"
 	 */
 	@Override
 	public String getFormattedResult() {
+		getParsedResult();
+		return String.format("%d%s", _rpm, " RPM");
+	}
+	
+	/**
+	 * @return the engine RPM, raw int value;
+	 */
+	public int getParsedResult() {
 		if (!"NODATA".equals(getResult())) {
 			// ignore first two bytes [41 0C] of the response
 			int a = buffer.get(2);
 			int b = buffer.get(3);
 			_rpm = (a * 256 + b) / 4;
 		}
-
-		return String.format("%d%s", _rpm, " RPM");
+		else
+		{
+			_rpm = -1;
+		}
+		return _rpm;
+		
 	}
 
 	@Override
@@ -50,6 +62,7 @@ public class EngineRPMObdCommand extends ObdCommand {
 	}
 	
 	public int getRPM() {
+		getParsedResult();
 		return _rpm;
 	}
 }

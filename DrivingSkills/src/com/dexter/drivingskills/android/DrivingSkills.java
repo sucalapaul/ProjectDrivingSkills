@@ -62,6 +62,7 @@ public class DrivingSkills extends Activity {
     public static final int MESSAGE_WRITE = 3;
     public static final int MESSAGE_DEVICE_NAME = 4;
     public static final int MESSAGE_TOAST = 5;
+    public static final int MESSAGE_UPDATE = 6;
 
     // Key names received from the BluetoothChatService Handler
     public static final String DEVICE_NAME = "device_name";
@@ -341,6 +342,14 @@ public class DrivingSkills extends Activity {
                 Toast.makeText(getApplicationContext(), msg.getData().getString(TOAST),
                                Toast.LENGTH_SHORT).show();
                 break;
+            
+            case MESSAGE_UPDATE:
+            	CarParameters carParameters = (CarParameters) msg.obj;
+            	String carData = carParameters.getStringSpeed() + " Kmh, " + 
+            			carParameters.getStringRpm() + "rpm, " + 
+            			carParameters.getThrottle() + "%";
+            	mConversationArrayAdapter.add(carData);
+            	break;
             }
         }
     };

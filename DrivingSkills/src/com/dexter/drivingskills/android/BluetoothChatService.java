@@ -22,6 +22,15 @@ import java.io.OutputStream;
 import java.util.UUID;
 
 import com.dexter.drivingskills.api.commands.ObdBaseCommand;
+import com.dexter.drivingskills.api.commands.SpeedObdCommand;
+import com.dexter.drivingskills.api.commands.engine.EngineRPMObdCommand;
+import com.dexter.drivingskills.api.commands.engine.ThrottlePositionObdCommand;
+import com.dexter.drivingskills.api.commands.protocol.EchoOffObdCommand;
+import com.dexter.drivingskills.api.commands.protocol.LineFeedOffObdCommand;
+import com.dexter.drivingskills.api.commands.protocol.ObdResetCommand;
+import com.dexter.drivingskills.api.commands.protocol.SelectProtocolObdCommand;
+import com.dexter.drivingskills.api.commands.protocol.TimeoutObdCommand;
+import com.dexter.drivingskills.api.enums.ObdProtocols;
 
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
@@ -98,6 +107,8 @@ public class BluetoothChatService {
     public synchronized int getState() {
         return mState;
     }
+    
+    
 
     /**
      * Start the chat service. Specifically start AcceptThread to begin a
@@ -209,7 +220,7 @@ public class BluetoothChatService {
             r = mConnectedThread;
         }
         // Perform the write unsynchronized
-        r.runCommand(obdCommand);
+        //r.runCommand(obdCommand);
 		
 	}
 
@@ -407,28 +418,93 @@ public class BluetoothChatService {
             mmOutStream = tmpOut;
         }
 
-        public void runCommand(ObdBaseCommand obdCommand) {
-			
-        	try {
-				obdCommand.run(mmInStream, mmOutStream);
-			} catch (IOException e) {
+        
+//        public void runCommand(ObdBaseCommand obdCommand) {
+//			
+//        	try {
+//				obdCommand.run(mmInStream, mmOutStream);
+//			} catch (IOException e) {
+//				Log.e(TAG, "IO exception", e);
+//			} catch (InterruptedException e) {
+//				Log.e(TAG, "InterruptedException", e);
+//			}
+////        	String result  = obdCommand.getFormattedResult();
+////        	//result.getBytes();
+////        	byte[] buffer = new byte[1024];
+////        	buffer = result.getBytes();
+////        	mHandler.obtainMessage(DrivingSkills.MESSAGE_READ, result.length(), -1, buffer)
+////            .sendToTarget();
+//		}
+        
+        //>TODO: Remove duplicate try-catch
+        public void run_loop() {
+        	
+        	ObdBaseCommand commandReset = new ObdResetCommand();
+        	ObdBaseCommand commandEchoOff = new EchoOffObdCommand();
+        	ObdBaseCommand commandLineFeedOff = new LineFeedOffObdCommand();
+        	ObdBaseCommand commandTimeout = new TimeoutObdCommand(62);
+        	ObdBaseCommand commandProtocol = new SelectProtocolObdCommand(ObdProtocols.AUTO);
+        	
+    		try {
+    			commandReset.run(mmInStream, mmOutStream);
+    			commandEchoOff.run(mmInStream, mmOutStream);
+    			commandLineFeedOff.run(mmInStream, mmOutStream);
+    			commandTimeout.run(mmInStream, mmOutStream);
+    			commandProtocol.run(mmInStream, mmOutStream);
+    		}
+    		catch (IOException e) {
 				Log.e(TAG, "IO exception", e);
-			} catch (InterruptedException e) {
-				Log.e(TAG, "InterruptedException", e);
-			}
-        	String result  = obdCommand.getFormattedResult();
-        	//result.getBytes();
-        	byte[] buffer = new byte[1024];
-        	buffer = result.getBytes();
-        	mHandler.obtainMessage(DrivingSkills.MESSAGE_READ, result.length(), -1, buffer)
-            .sendToTarget();
-			
-		}
+				connectionLost();
+    		} 
+    		catch (InterruptedException e) {
+				Log.e(TAG, "Interrupted exception", e);
+				connectionLost();
+    		}
+        	
+        	while (true) {
+        		
+        		EngineRPMObdCommand commandRPM = new EngineRPMObdCommand();
+        		SpeedObdCommand commandSpeed = new SpeedObdCommand();
+        		ThrottlePositionObdCommand commandThrottle = new ThrottlePositionObdCommand();
+        		
+//        		
+//        		runCommand(commandRPM);
+//        		runCommand(commandSpeed);
+//        		runCommand(commandThrottle);
+        		
+        		try {
+        			commandRPM.run(mmInStream, mmOutStream);
+        			commandSpeed.run(mmInStream, mmOutStream);
+        			commandThrottle.run(mmInStream, mmOutStream);
+        		}
+        		catch (IOException e) {
+    				Log.e(TAG, "IO exception", e);
+    				connectionLost();
+    				break;
+        		} 
+        		catch (InterruptedException e) {
+    				Log.e(TAG, "Interrupted exception", e);
+    				connectionLost();
+    				break;
+				}
+        		
+        		mCarParameters.setSpeed(commandSpeed.getParsedResult());
+        		mCarParameters.setRpm(commandRPM.getParsedResult());
+        		mCarParameters.setThrottle(commandThrottle.getParsedResult());
+        		
+              mHandler.obtainMessage(DrivingSkills.MESSAGE_UPDATE, -1, -1, mCarParameters)
+              .sendToTarget();
+        		
+        	}
+        	
+        }
 
 		public void run() {
             Log.i(TAG, "BEGIN mConnectedThread");
             byte[] buffer = new byte[1024];
             int bytes;
+            
+            run_loop();
 
             // Keep listening to the InputStream while connected
 //            while (true) {

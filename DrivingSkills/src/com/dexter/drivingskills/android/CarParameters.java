@@ -54,6 +54,10 @@ public class CarParameters {
 		updateAcceleration();
 		updateGear();
 	}
+	
+	public void setSpeed(String speed) {
+		setSpeed(Double.parseDouble(speed));
+	}
 
 	public double getRpm() {
 		return rpm;
@@ -68,12 +72,20 @@ public class CarParameters {
 		updateGear();
 	}
 
+	public void setRpm(String rpm) {
+		setRpm(Double.parseDouble(rpm));
+	}
+
 	public double getThrottle() {
 		return throttle;
 	}
 	
 	public String getStringThrottle() {
 		return Integer.toString( (int) throttle ) + "%";
+	}
+	
+	public void setThrottle(double throttle) {
+		this.throttle = throttle;
 	}
 
 	public double getAcceleration() {
@@ -95,5 +107,4 @@ public class CarParameters {
 		
 		return "Na";
 	}
-
 }

@@ -50,7 +50,7 @@
     <string name="gear">5</string>
     <string name="label_throttle">ap</string>
     <string name="throttle">27%</string>
-    <string name="road_type">Local roat, City</string>
+    <string name="road_type">Local road, City</string>
     <string name="driving_type">Economical Driving</string>
     <string name="acceleration">0.1</string>
     <string name="label_acceleration">g</string>

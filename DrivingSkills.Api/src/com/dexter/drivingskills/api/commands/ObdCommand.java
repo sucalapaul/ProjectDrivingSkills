@@ -30,11 +30,13 @@ public abstract class ObdCommand extends ObdBaseCommand {
         // read string each two chars
         int begin = 0;
         int end = 2;
-        while (end <= rawData.length()) {
-            String temp = "0x" + rawData.substring(begin, end);
-            buffer.add(Integer.decode(temp));
-            begin = end;
-            end += 2;
+        if (!"NODATA".equals(getResult())) {
+	        while (end <= rawData.length()) {
+	            String temp = "0x" + rawData.substring(begin, end);
+	            buffer.add(Integer.decode(temp));
+	            begin = end;
+	            end += 2;
+	        }
         }
     }
 }
