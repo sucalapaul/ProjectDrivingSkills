@@ -43,17 +43,21 @@
     <string name="action_settings">Settings</string>
     <string name="hello_world">Hello world!</string>
     <string name="label_speed">Kmh</string>
-    <string name="speed">55</string>
+    <string name="speed">0</string>
     <string name="label_rpm">rpm</string>
-    <string name="rpm">1600</string>
+    <string name="rpm">OFF</string>
     <string name="label_gear">th</string>
-    <string name="gear">5</string>
+    <string name="gear">N</string>
     <string name="label_throttle">ap</string>
-    <string name="throttle">27%</string>
+    <string name="throttle">0%</string>
     <string name="road_type">Local road, City</string>
     <string name="driving_type">Economical Driving</string>
-    <string name="acceleration">0.1</string>
+    <string name="acceleration">0.0</string>
     <string name="label_acceleration">g</string>
     <string name="parameters">Car Parameters</string>
+    <string name="title_activity_statistics">StatisticsActivity</string>
+    
+    <!-- Statistics Activity -->
+    <string name="car_name">Dacia Logan</string>
 
 </resources>

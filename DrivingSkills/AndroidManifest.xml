@@ -54,11 +54,23 @@
                 android:value="com.example.android.BluetoothChat.BluetoothChat" />
         </activity>
 
+        <service android:name="com.dexter.drivingskills.android.BluetoothChatService" />
+
         <receiver android:name="com.dexter.drivingskills.android.StartupBroadcastReceiver" >
             <intent-filter>
                 <action android:name="android.intent.action.BOOT_COMPLETED" />
             </intent-filter>
         </receiver>
+
+        <activity
+            android:name="com.dexter.drivingskills.android.StatisticsActivity"
+            android:label="@string/title_activity_statistics" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
     </application>
 
 </manifest>

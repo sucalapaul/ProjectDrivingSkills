@@ -1,0 +1,228 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/whitesmoke" >
+
+    <!-- Time -->
+    <TextView
+        android:id="@+id/trip_date_time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_marginLeft="6dip"
+        android:layout_marginRight="6dip"
+        android:text="13:22"
+        android:textColor="@color/dimgray"
+        android:textSize="20sp" />
+
+    <!-- Date -->
+    <TextView
+        android:id="@+id/trip_date"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@id/trip_date_time"
+        android:layout_marginLeft="6dip"
+        android:text="yesterday"
+        android:textColor="@color/dimgray"
+        android:textSize="12sp" />
+
+    <!-- Bullet -->
+    <View
+        android:id="@+id/bullet"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:layout_alignParentTop="true"
+        android:layout_toRightOf="@id/trip_date_time"
+        android:background="@drawable/circle" />
+
+    <!-- Timeline -->
+    <View
+        android:id="@+id/timeline"
+        android:layout_width="6dp"
+        android:layout_height="150dp"
+        android:layout_alignLeft="@id/bullet"
+        android:layout_marginLeft="7dp"
+        android:background="@color/mediumturquoise"
+        tools:ignore="Orientation" />
+
+    <!-- End Location -->
+    <TextView
+        android:id="@+id/trip_location"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_marginLeft="6dp"
+        android:layout_toRightOf="@id/bullet"
+        android:text="Cluj-Napoca, Cluj"
+        android:textColor="@color/dimgray"
+        android:textSize="20sp" />
+
+    <!-- Details card -->
+    <RelativeLayout
+        android:layout_width="0dp"
+        android:layout_height="100dp"
+        android:layout_alignLeft="@+id/trip_location"
+        android:layout_alignParentRight="true"
+        android:layout_below="@id/trip_location"
+        android:layout_marginBottom="100dp"
+        android:layout_marginRight="10dip"
+        android:layout_marginTop="5dp"
+        android:background="@drawable/white_card_background" >
+
+        <!-- Trip distance -->
+
+        <TextView
+            android:id="@+id/trip_distance"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_marginLeft="5dp"
+            android:text="17.4"
+            android:textColor="@color/dimgray"
+            android:textSize="30sp" />
+
+        <TextView
+            android:id="@+id/label_trip_distance"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@id/trip_distance"
+            android:layout_toRightOf="@id/trip_distance"
+            android:text="km"
+            android:textColor="@color/darkgray"
+            android:textSize="20sp" />
+
+        <!-- Trip price -->
+
+        <TextView
+            android:id="@+id/label_trip_price"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@id/trip_distance"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="5dp"
+            android:text="ron"
+            android:textColor="@color/darkgray"
+            android:textSize="20sp" />
+
+        <TextView
+            android:id="@+id/trip_price"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_toLeftOf="@id/label_trip_price"
+            android:text="35"
+            android:textColor="@color/dimgray"
+            android:textSize="30sp" />
+
+        <!-- Separator -->
+
+        <View
+            android:id="@+id/trip_separator_1"
+            android:layout_width="fill_parent"
+            android:layout_height="1px"
+            android:layout_below="@id/trip_distance"
+            android:background="@color/whitesmoke" />
+
+        <!-- Explanations -->
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/trip_separator_1"
+            android:orientation="horizontal" >
+
+            <!-- Three layouts -->
+            
+            <!-- Brake details -->
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="horizontal" >
+
+                <View
+                    android:layout_width="22dp"
+                    android:layout_height="22dp"
+                    android:layout_margin="5dp"
+                    android:background="@drawable/circle_red" />
+
+                <TextView
+                    android:id="@+id/trip_brake_details"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:text="Hard \nbrakes"
+                    android:textColor="@color/darkgray"
+                    android:textSize="10sp" />
+            </LinearLayout>
+
+            <!-- Speed Details -->
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="horizontal" >
+
+                <View
+                    android:layout_width="22dp"
+                    android:layout_height="22dp"
+                    android:layout_margin="5dp"
+                    android:background="@drawable/circle_red" />
+
+                <TextView
+                    android:id="@+id/trip_speed_details"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:text="Over \nSpeed"
+                    android:textColor="@color/darkgray"
+                    android:textSize="10sp" />
+            </LinearLayout>
+
+            <!-- Throttle details -->
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="horizontal" >
+
+                <View
+                    android:layout_width="22dp"
+                    android:layout_height="22dp"
+                    android:layout_margin="5dp"
+                    android:background="@drawable/circle_red" />
+
+                <TextView
+                    android:id="@+id/trip_throttle_details"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:text="High \nThrottle"
+                    android:textColor="@color/darkgray"
+                    android:textSize="10sp" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <!-- Driving type -->
+        <TextView
+            android:id="@+id/trip_driving_type"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentLeft="true"
+            android:layout_marginBottom="5dp"
+            android:layout_marginLeft="5dp"
+            android:text="Aggressive driving"
+            android:textColor="@color/orangered"
+            android:textSize="15sp" />
+
+        <View
+            android:layout_width="fill_parent"
+            android:layout_height="1px"
+            android:layout_above="@id/trip_driving_type"
+            android:background="@color/whitesmoke" />
+    </RelativeLayout> <!-- /Details card -->
+
+</RelativeLayout>

@@ -1,0 +1,241 @@
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content" >
+
+    <!-- All -->
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical" 
+        android:background="@color/whitesmoke">
+        
+        <!-- Top statistics -->]
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/whitesmoke"
+            android:orientation="vertical" >
+            
+            <!-- Car Name -->
+            <RelativeLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:padding="5dp" >
+                
+                <TextView
+                    android:id="@+id/car_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentBottom="true"
+                    android:layout_alignParentTop="true"
+                    android:layout_centerHorizontal="true"
+                    android:text="@string/car_name"
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:textColor="@color/dimgray"
+                    android:textSize="20sp" />
+                
+            </RelativeLayout>
+            <!-- /Car Name -->
+            
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="1px"
+                android:background="@color/darkgray" />
+            
+            <!-- Numbers -->
+            <LinearLayout 
+                android:layout_width="fill_parent"
+                android:layout_height="150dp"
+                android:orientation="horizontal"
+                android:baselineAligned="false">
+                
+                <!-- Left -->
+                <RelativeLayout 
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="fill_parent"
+                    >
+                    
+                    <!-- Distance -->
+                   	<TextView
+                        android:id="@+id/week_distance"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerHorizontal="true"
+                        android:layout_alignParentTop="true"
+                        
+                        android:text="55.3"
+                        android:textColor="@color/dimgray"
+                        android:textSize="40sp" />
+                    
+                    <TextView
+                        android:id="@+id/label_week_distance"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/week_distance"
+                        android:layout_centerHorizontal="true"
+                        android:layout_marginTop="-10sp"
+                        android:text="km"
+                        android:textColor="@color/darkgray"
+                        android:textSize="20sp" />
+                    
+                    <!-- Time -->  ]     
+                    <TextView
+                        android:id="@+id/label_week_time"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentBottom="true"
+                        android:layout_centerHorizontal="true"
+                        android:layout_marginTop="-10sp"
+                        android:text="hours"
+                        android:textColor="@color/darkgray"
+                        android:textSize="20sp" />
+                      
+                   	<TextView
+                        android:id="@+id/week_time"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerHorizontal="true"
+                        android:layout_above="@id/label_week_time"
+                        
+                        android:text="1:25"
+                        android:textColor="@color/dimgray"
+                        android:textSize="40sp" />
+                    
+                </RelativeLayout> 
+                <!-- /Left -->
+                
+                <!-- Center -->
+                <RelativeLayout
+                    android:layout_width="0dp"
+                    android:layout_height="fill_parent"
+                    android:layout_weight="1" >
+
+                    <TextView
+                        android:id="@+id/week_score"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerInParent="true"
+                        
+                        android:text="24"
+                        android:textAppearance="?android:attr/textAppearanceLarge"
+                        android:textColor="#dc4f4c"
+                        android:textSize="60sp" />
+                    
+                    <TextView
+                        android:id="@+id/label_week_score"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/week_score"
+                        android:layout_centerHorizontal="true"
+                        android:layout_marginTop="-15sp"
+                        android:text="score"
+                        android:textAppearance="?android:attr/textAppearanceLarge"
+                        android:textColor="#dc4f4c"
+                        android:textSize="20sp" />
+                    
+                </RelativeLayout>
+                <!-- /Center -->
+
+                              
+                <!-- Right -->
+                <RelativeLayout 
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="fill_parent"
+                    >
+                    
+                    <!-- Cost -->
+                   	<TextView
+                        android:id="@+id/week_cost"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerHorizontal="true"
+                        android:layout_alignParentTop="true"
+                        
+                        android:text="89"
+                        android:textColor="@color/dimgray"
+                        android:textSize="40sp" />
+                    
+                    <TextView
+                        android:id="@+id/label_week_cost"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/week_cost"
+                        android:layout_centerHorizontal="true"
+                        android:layout_marginTop="-10sp"
+                        android:text="ron"
+                        android:textColor="@color/darkgray"
+                        android:textSize="20sp" />
+                    
+                    <!-- l/km -->    
+                    <TextView
+                        android:id="@+id/label_week_lkm"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentBottom="true"
+                        android:layout_centerHorizontal="true"
+                        android:layout_marginTop="-10sp"
+                        android:text="l/100km"
+                        android:textColor="@color/darkgray"
+                        android:textSize="20sp" />
+                            
+                   	<TextView
+                        android:id="@+id/week_lkm"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerHorizontal="true"
+                        android:layout_above="@id/label_week_lkm"
+                        
+                        android:text="7.25"
+                        android:textColor="@color/dimgray"
+                        android:textSize="40sp" />
+
+                    
+                    
+                </RelativeLayout>
+                <!-- /Right -->
+                
+                
+            </LinearLayout>
+            <!-- /Numbers -->
+            
+        </LinearLayout>
+        <!-- /Top statistics -->
+        
+        <Button
+            android:id="@+id/button_db"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_weight="1"
+            android:text="teeeest" />
+        
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="100dp"
+            android:background="#f7f9f1"
+            android:orientation="vertical" >
+        </LinearLayout>
+        
+	    <ListView
+	        android:id="@+id/list"
+	        android:layout_width="fill_parent"
+	        android:layout_height="1000dp"
+	        android:divider="@null"
+	        android:dividerHeight="0dp"
+	        android:listSelector="@drawable/list_selector" />
+        
+        
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="0dp"
+            android:background="@color/whitesmoke"
+            android:orientation="vertical"
+             >
+        </LinearLayout>
+        
+    </LinearLayout>
+    <!-- /All -->
+
+</ScrollView>

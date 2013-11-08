@@ -5,7 +5,7 @@ package com.dexter.drivingskills.android;
  * or computed (acceleration)
  * @author dexter
  */
-public class CarParameters {
+public class CarParameters implements Cloneable {
 	
 	//Member Fields
 	private double speed;
@@ -34,12 +34,12 @@ public class CarParameters {
 	
 
 	private void updateGear() {
-		// TODO Compute ration Speed/rpm
+		// TODO Compute ratio Speed/rpm
 		// if RPM < 1500 -> N
 		
 	}
 	
-	//TODO Add synchronized to all getters and setters
+	//TODO Add synchronized to all getters and setters ??
 	
 	public double getSpeed() {
 		return speed;
@@ -85,11 +85,15 @@ public class CarParameters {
 	}
 	
 	public void setThrottle(double throttle) {
-		this.throttle = throttle;
+		this.throttle = (throttle - 16) * 1.42;
 	}
 
 	public double getAcceleration() {
 		return acceleration;
+	}
+
+	public String getStringAcceleration() {
+		return Double.toString(acceleration);
 	}
 
 	public int getGear() {
@@ -107,4 +111,10 @@ public class CarParameters {
 		
 		return "Na";
 	}
+	
+    protected Object clone() throws CloneNotSupportedException {
+        return super.clone();
+    }
+
+
 }

@@ -9,7 +9,7 @@ import android.content.Intent;
 
 /**
  * @author dexter
- *
+ * Start the Bluetooth Service automatically at system startup
  */
 public class StartupBroadcastReceiver extends BroadcastReceiver {
 

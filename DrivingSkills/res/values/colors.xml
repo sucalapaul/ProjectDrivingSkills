@@ -1,6 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="smallText">#aaaaaa</color>
-    <color name="bigText">#ffffff</color>
+    <color name="smallText">#666A73</color>
+    <color name="bigText">#F2EDE4</color>
+    
+    
+    <color name="white">#ffffff</color>
+    <color name="whitesmoke">#f7f3f0</color>
+    <color name="dimgray">#666666</color>
+    <color name="darkgray">#acabaa</color>
+    <color name="orangered">#fc550d</color>
+    <color name="mediumturquoise">#3dd5ca</color>
+    
+    
+    
+    
+    
+    
+    
     
 </resources>

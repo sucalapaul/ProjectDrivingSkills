@@ -9,6 +9,8 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.util.ArrayList;
 
+import android.util.Log;
+
 /**
  * TODO put description
  */
@@ -137,6 +139,7 @@ public abstract class ObdBaseCommand {
 		 */
         //
         rawData = res.toString().trim();
+        Log.d("RAWDATA", rawData);
     }
 
 	/**

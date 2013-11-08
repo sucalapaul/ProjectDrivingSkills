@@ -1,10 +1,5 @@
 package com.dexter.drivingskills.android;
 
-/*
- * TODO put header
- */
-//package eu.lighthouselabs.obd.reader.io;
-
 import com.dexter.drivingskills.api.commands.ObdBaseCommand;
 
 /**
@@ -13,6 +8,7 @@ import com.dexter.drivingskills.api.commands.ObdBaseCommand;
  * representation of an ObdCommand instance plus a state that will be
  * interpreted and manipulated by ObdGatewayService.
  */
+@Deprecated
 public class ObdCommandJob {
 
   private Long _id;
