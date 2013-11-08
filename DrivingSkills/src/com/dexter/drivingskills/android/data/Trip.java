@@ -268,7 +268,9 @@ public class Trip {
 	}
 
 
-
+	/**
+	 * @return trip end time
+	 */
 	public CharSequence getEndDateTimeString() {
 		Date date = new Date( endTime *1000L );
 		SimpleDateFormat sdf = new SimpleDateFormat("HH:mm");
@@ -278,51 +280,62 @@ public class Trip {
 	}
 
 
-
+	/**
+	 * @return trip date
+	 */
 	public CharSequence getEndDateString() {
 		Date date = new Date( endTime *1000L );
-		SimpleDateFormat sdf = new SimpleDateFormat("E");
+		SimpleDateFormat sdf = new SimpleDateFormat("EE");
 		String formattedDate = sdf.format(date);
 		
 		return formattedDate;
 	}
 
 
-
+	/**
+	 * @return trip distance, one decimal, as a string
+	 */
 	public CharSequence getDistanceString() {
 		return String.format("%.1f", distance);
 	}
 
 
-
+	/**
+	 * @return estimated trip price
+	 */
 	public CharSequence getPriceString() {
 		return String.format("%.1f", price);
 	}
 
 
-
+	/**
+	 * @return driving type as a string
+	 */
 	public CharSequence getDrivingTypeString() {
 		return DRIVE[drivingType] + " driving";
 	}
 
 
-
+	/**
+	 * @return brake usage type, as a string
+	 */
 	public CharSequence getBrakeTypeString() {
 		return BRAKE[brakeType];
 	}
 
 
-
+	/**
+	 * @return overspeed occurrences as a string
+	 */
 	public CharSequence getSpeedTypeString() {
 		return SPEED[speedType];
 	}
 
 
-
+	/**
+	 * @return throttle usage as a string
+	 */
 	public CharSequence getThrottleTypeString() {
 		return THROTTLE[throttleType];
 	}
-	
-
-
 }

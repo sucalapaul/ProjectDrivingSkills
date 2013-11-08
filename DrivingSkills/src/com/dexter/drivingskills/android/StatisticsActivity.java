@@ -37,58 +37,13 @@ public class StatisticsActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_statistics);
 		
+		list=(ListView)findViewById(R.id.list);
+		
 		datasource = new TripsDataSource(this);
 	    datasource.open();
 	    
+	    //Fetch trips from database and add them to ListView
 	    List<Trip> tripsList = datasource.getAllTrips();
-	    
-	    
-		
-		
-		//TODO: Get these from Database!
-		
-//        ArrayList<HashMap<String, String>> tripsList = new ArrayList<HashMap<String, String>>();
-//        
-//        // creating new HashMap
-//        HashMap<String, String> map;
-//        
-//        map = new HashMap<String, String>();
-//        
-//        // adding each child node to HashMap key => value
-//        map.put(KEY_ID, "1");
-//        map.put(KEY_DATE_TIME, "13:51");
-//        map.put(KEY_DATE, "today");
-//        map.put(KEY_DISTANCE, "22.3");
-//        map.put(KEY_PRICE, "10");
-//        map.put(KEY_LOCATION, "Cluj-Napoca, Cluj");
-//        map.put(KEY_DRIVING_TYPE, "Aggressive Driving");
-//        map.put(KEY_BRAKE_DETAILS, "Hard \nbrakes");
-//        map.put(KEY_SPEED_DETAILS, "Over \nspeed");
-//        map.put(KEY_THROTTLE_DETAILS, "High \nthrottle");
-//
-//        // adding HashList to ArrayList
-//        tripsList.add(map);        
-//        map = new HashMap<String, String>();
-//        
-//        // adding each child node to HashMap key => value
-//        map.put(KEY_ID, "1");
-//        map.put(KEY_DATE_TIME, "23.11");
-//        map.put(KEY_DATE, "yesterday");
-//        map.put(KEY_DISTANCE, "81.3");
-//        map.put(KEY_PRICE, "53");
-//        map.put(KEY_LOCATION, "Zalau, Salaj");
-//        map.put(KEY_DRIVING_TYPE, "Economical Driving");
-//        map.put(KEY_BRAKE_DETAILS, "Hard \nbrakes");
-//        map.put(KEY_SPEED_DETAILS, "Over \nspeed");
-//        map.put(KEY_THROTTLE_DETAILS, "High \nthrottle");
-//
-//        // adding HashList to ArrayList
-//        tripsList.add(map);
-
- 
-        list=(ListView)findViewById(R.id.list);
- 
-        // Getting adapter by passing xml data ArrayList
         adapter=new LazyAdapter(this, tripsList);
         list.setAdapter(adapter);
  
@@ -107,6 +62,7 @@ public class StatisticsActivity extends Activity {
 	public void onStart() {
 		super.onStart();
 		
+		//TEST, DEBUG
 		Button b = (Button) findViewById(R.id.button_db);
 		b.setOnClickListener(new OnClickListener() {
 			public void onClick(View v) {
@@ -126,7 +82,6 @@ public class StatisticsActivity extends Activity {
 						Trip.SPEED_NORMAL,
 						Trip.THROTTLE_HARD, 
 						Trip.DRIVE_AGGRESSIVE);
-				
 			}
 		});
 	}

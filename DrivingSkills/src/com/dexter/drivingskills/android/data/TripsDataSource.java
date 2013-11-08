@@ -15,6 +15,7 @@ import android.database.sqlite.SQLiteDatabase;
 /**
  * @author dexter
  * Class for adding and fetching Trips to/from database
+ * A sort of Repository
  */
 public class TripsDataSource {
 
@@ -48,6 +49,7 @@ public class TripsDataSource {
 		dbHelper.close();
 	}
 
+	//I Hate this Manual Work!!!!
 	public Trip createTrip(
 			 String 	startLocation,
 			 String		endLocation,
@@ -82,6 +84,8 @@ public class TripsDataSource {
 		return newTrip;
 	}
 
+	//should I delete trips?
+	@Deprecated 
 	public void deleteTrip(Trip trip) {
 		long id = trip.getId();
 		database.delete(MySQLiteHelper.TABLE_TRIPS, MySQLiteHelper.TRIP_ID
@@ -100,11 +104,12 @@ public class TripsDataSource {
 			trips.add(trip);
 			cursor.moveToNext();
 		}
-		// make sure to close the cursor
+
 		cursor.close();
 		return trips;
 	}
 
+	//More Manual Work!!
 	private Trip cursorToTrip(Cursor c) {
 		Trip trip = new Trip();
 		trip.setId			(c.getLong		( c.getColumnIndex( MySQLiteHelper.TRIP_ID )));

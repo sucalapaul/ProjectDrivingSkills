@@ -11,7 +11,8 @@ import android.util.Log;
 
 /**
  * @author dexter
- *
+ * Database shit
+ * I so need a tool for this...
  */
 public class MySQLiteHelper extends SQLiteOpenHelper {
 
@@ -59,7 +60,7 @@ public class MySQLiteHelper extends SQLiteOpenHelper {
 	public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
 		Log.w(MySQLiteHelper.class.getName(),
 				"Upgrading database from version " + oldVersion + " to "
-						+ newVersion + ", which will destroy all old data");
+				+ newVersion + ", which will destroy all old data");
 		db.execSQL("DROP TABLE IF EXISTS " + TABLE_TRIPS);
 		onCreate(db);
 	}
