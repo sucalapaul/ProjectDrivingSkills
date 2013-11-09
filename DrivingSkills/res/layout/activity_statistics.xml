@@ -118,7 +118,7 @@
                         android:layout_height="wrap_content"
                         android:layout_centerInParent="true"
                         
-                        android:text="24"
+                        android:text="6.5"
                         android:textAppearance="?android:attr/textAppearanceLarge"
                         android:textColor="#dc4f4c"
                         android:textSize="60sp" />
@@ -154,7 +154,7 @@
                         android:layout_centerHorizontal="true"
                         android:layout_alignParentTop="true"
                         
-                        android:text="89"
+                        android:text="20.0"
                         android:textColor="@color/dimgray"
                         android:textSize="40sp" />
                     
@@ -204,19 +204,26 @@
         </LinearLayout>
         <!-- /Top statistics -->
         
-        <Button
-            android:id="@+id/button_db"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:layout_weight="1"
-            android:text="teeeest" />
         
+        
+
+        
+        <!-- ImageView
+                android:id="@+id/imageView1"
+                android:layout_width="wrap_content"
+                android:layout_height="166dp"
+                android:scaleType="fitXY"
+                android:src="@drawable/map4" 
+                android:contentDescription=""/ -->
+                
         <LinearLayout
             android:layout_width="fill_parent"
-            android:layout_height="100dp"
-            android:background="#f7f9f1"
+            android:layout_height="200dp"
+            android:background="@drawable/map4"
             android:orientation="vertical" >
+
         </LinearLayout>
+
         
 	    <ListView
 	        android:id="@+id/list"
@@ -225,15 +232,15 @@
 	        android:divider="@null"
 	        android:dividerHeight="0dp"
 	        android:listSelector="@drawable/list_selector" />
-        
-        
-        <LinearLayout
-            android:layout_width="fill_parent"
+	    
+
+		<Button
+            android:id="@+id/button_db"
+            android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:background="@color/whitesmoke"
-            android:orientation="vertical"
-             >
-        </LinearLayout>
+            android:layout_weight="1"
+            android:text="IIIII" />
+        
         
     </LinearLayout>
     <!-- /All -->

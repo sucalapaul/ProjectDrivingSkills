@@ -24,6 +24,7 @@ public class Trip {
 	private int 		speedType;
 	private int		throttleType;
 	private int		drivingType;
+	private double		score;
 	
 	//TODO: put these in a database or XML
 	public static final String[] DRIVE = {
@@ -77,7 +78,9 @@ public class Trip {
 	 * constructor
 	 */
 	public Trip() {
-		
+		brakeType = BRAKE_EASY;
+		speedType = SPEED_NORMAL;
+		throttleType = THROTTLE_EASY;
 	}
 	
 	
@@ -337,5 +340,17 @@ public class Trip {
 	 */
 	public CharSequence getThrottleTypeString() {
 		return THROTTLE[throttleType];
+	}
+
+
+
+	public double getScore() {
+		return score;
+	}
+
+
+
+	public void setScore(double score) {
+		this.score = score;
 	}
 }

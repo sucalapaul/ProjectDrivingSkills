@@ -20,8 +20,11 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.lang.reflect.Method;
+import java.util.Random;
 import java.util.UUID;
 
+import com.dexter.drivingskills.android.data.Trip;
+import com.dexter.drivingskills.android.data.TripsDataSource;
 import com.dexter.drivingskills.api.commands.ObdBaseCommand;
 import com.dexter.drivingskills.api.commands.SpeedObdCommand;
 import com.dexter.drivingskills.api.commands.engine.EngineRPMObdCommand;
@@ -74,7 +77,7 @@ public class BluetoothChatService extends Service {
     // Member fields
     private final BluetoothAdapter mAdapter;
     private Handler mHandler;
-    private final CarParameters mCarParameters;
+    private CarParameters mCarParameters;
     private ConnectThread mConnectThread;
     private ConnectedThread mConnectedThread;
     private int mState;
@@ -86,6 +89,9 @@ public class BluetoothChatService extends Service {
     public static final int STATE_CONNECTING = 2; // now initiating an outgoing connection
     public static final int STATE_CONNECTED = 3;  // now connected to a remote device
     public static final int STATE_CONNECTION_LOST = 4;
+    
+
+	private TripsDataSource datasource;
 
     /**
      * Constructor. Prepares a new DrivingSkills session.
@@ -108,7 +114,9 @@ public class BluetoothChatService extends Service {
         mHandler = null;
         mState = STATE_NONE;
     	mCarParameters = new CarParameters();
-    	BluetoothChatService.this.start();
+//		datasource = new TripsDataSource(this);
+//	    datasource.open();
+    	BluetoothChatService.this.start();	
     }
 
     /**
@@ -118,6 +126,7 @@ public class BluetoothChatService extends Service {
     private synchronized void setState(int state) {
         if (D) Log.d(TAG, "setState() " + mState + " -> " + state);
         mState = state;
+        mCarParameters.setConnectionStatus(state);
 
         // Give the new state to the Handler so the UI Activity can update
         //mHandler.obtainMessage(DrivingSkills.MESSAGE_STATE_CHANGE, state, -1).sendToTarget();
@@ -127,6 +136,13 @@ public class BluetoothChatService extends Service {
      * Return the current connection state. */
     public synchronized int getState() {
         return mState;
+    }
+    
+    public void loadDB() {
+    	if (datasource == null){
+			datasource = new TripsDataSource(this);
+		    datasource.open();
+    	}
     }
     
 
@@ -282,9 +298,14 @@ public class BluetoothChatService extends Service {
      */
     private void connectionLost() {
         setState(STATE_CONNECTION_LOST);
-        BluetoothChatService.this.start();
-
+        
         //TODO: save the trip if we were recording
+        saveTrip();
+        
+        BluetoothChatService.this.start();
+        
+
+        
         // Send a failure message back to the Activity
 //        Message msg = mHandler.obtainMessage(DrivingSkills.MESSAGE_TOAST);
 //        Bundle bundle = new Bundle();
@@ -294,7 +315,36 @@ public class BluetoothChatService extends Service {
     }
 
 
-    /**
+    private void saveTrip() {
+		if (mCarParameters.getDistance() > 0.1)
+		{
+			if (datasource == null){
+				return;
+			}
+			
+			
+			long now = System.currentTimeMillis() / 1000L;
+			Random rand = new Random();
+			double distance = rand.nextDouble()*50 + 10;
+			
+			Trip trip = datasource.createTrip(
+					"Cluj-Napoca, CJ",
+					"Cluj-Napoca, CJ", 
+					mCarParameters.getCreatedAt(),
+					now,
+					mCarParameters.getDistance(),
+					mCarParameters.getDistance() * 0.42,
+					mCarParameters.getTrip().getBrakeType(),
+					mCarParameters.getTrip().getSpeedType(),
+					mCarParameters.getTrip().getThrottleType(),
+					Trip.DRIVE_ANXIOUS, 
+					mCarParameters.getScore());
+		}
+		
+	}
+
+
+	/**
      * This thread runs while attempting to make an outgoing connection
      * with a device. It runs straight through; the connection either
      * succeeds or fails.
@@ -304,6 +354,7 @@ public class BluetoothChatService extends Service {
         private final BluetoothDevice mmDevice;
 
         public ConnectThread(BluetoothDevice device) {
+        	//loadDB();
             mmDevice = device;
             BluetoothSocket tmp = null;
             
@@ -410,6 +461,9 @@ public class BluetoothChatService extends Service {
         
         //>TODO: Remove duplicate try-catch
         public void run_loop() {
+        	mCarParameters = new CarParameters();
+        	mCarParameters.setConnectionStatus(mState);
+        	
         	
         	ObdBaseCommand commandReset = new ObdResetCommand();
         	ObdBaseCommand commandEchoOff = new EchoOffObdCommand();
@@ -435,7 +489,7 @@ public class BluetoothChatService extends Service {
         	
     		// Poll car data
     		// Loop will end when the connection is lost
-        	while (true) {
+        	while (mState == STATE_CONNECTED) {
         		EngineRPMObdCommand commandRPM = new EngineRPMObdCommand();
         		SpeedObdCommand commandSpeed = new SpeedObdCommand();
         		ThrottlePositionObdCommand commandThrottle = new ThrottlePositionObdCommand();
@@ -459,6 +513,11 @@ public class BluetoothChatService extends Service {
         		mCarParameters.setSpeed( commandSpeed.getParsedResult() );
         		mCarParameters.setRpm( commandRPM.getParsedResult() );
         		mCarParameters.setThrottle( commandThrottle.getParsedResult() );
+        		
+        		//TODO: Hackish; when the trip is done?
+        		if (mCarParameters.isEngineON() == false && mCarParameters.getDistance() > 0.1){
+        			connectionLost();
+        		}
         		
         		// Update UI, if visible
         		try {
@@ -496,7 +555,6 @@ public class BluetoothChatService extends Service {
             }
         }
 
-		@Deprecated
         public void cancel() {
             try {
                 mmSocket.close();

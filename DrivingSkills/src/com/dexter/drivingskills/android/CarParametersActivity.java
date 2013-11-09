@@ -35,6 +35,7 @@ public class CarParametersActivity extends Activity {
 	private TextView mTextGear;
 	private TextView mTextThrottle;
 	private TextView mTextAcceleration;
+	private TextView mTextDrivingType;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -46,6 +47,7 @@ public class CarParametersActivity extends Activity {
 		mTextGear = (TextView) findViewById(R.id.gear);
 		mTextThrottle = (TextView) findViewById(R.id.throttle);
 		mTextAcceleration = (TextView) findViewById(R.id.acceleration);
+		mTextDrivingType = ( TextView ) findViewById(R.id.driving_type);
 		// Show the Up button in the action bar.
 		//setupActionBar();
 		
@@ -132,6 +134,7 @@ public class CarParametersActivity extends Activity {
             LocalBinder binder = (LocalBinder) service;
             mService = binder.getService();
             mService.registerHandler(mHandler);
+            mService.loadDB();
             mBound = true;
         }
         
@@ -154,6 +157,7 @@ public class CarParametersActivity extends Activity {
     				mTextGear.setText( mCarParameters.getStringGear() );
     				mTextThrottle.setText( mCarParameters.getStringThrottle() );
     				mTextAcceleration.setText( mCarParameters.getStringAcceleration() );
+    				mTextDrivingType.setText( mCarParameters.getNote() );
 
     				break;
                 case MESSAGE_TOAST:

@@ -28,9 +28,12 @@ public class MySQLiteHelper extends SQLiteOpenHelper {
 	public static final String TRIP_SPEED_TYPE = "speed_type";
 	public static final String TRIP_THROTTLE_TYPE = "throttle_type";
 	public static final String TRIP_DRIVING_TYPE = "driving_type";
+	public static final String TRIP_SCORE = "score";
 
 	private static final String DATABASE_NAME = "driving_skills.db";
-	private static final int DATABASE_VERSION = 1;
+	private static final int DATABASE_VERSION = 2;
+	
+	private static MySQLiteHelper mInstance;
 
 	// Database creation sql statement
 	private static final String DATABASE_CREATE = "create table "
@@ -45,9 +48,26 @@ public class MySQLiteHelper extends SQLiteOpenHelper {
 			+ TRIP_BRAKE_TYPE 		+ " integer	not null, "
 			+ TRIP_SPEED_TYPE	 	+ " integer	not null, "
 			+ TRIP_THROTTLE_TYPE 	+ " integer	not null, "
-			+ TRIP_DRIVING_TYPE 	+ " integer	not null);";
+			+ TRIP_DRIVING_TYPE 	+ " integer	not null, "
+			+ TRIP_SCORE		 	+ " real	not null);";
 
-	public MySQLiteHelper(Context context) {
+	
+    private Context mCxt;
+
+    public static MySQLiteHelper getInstance(Context ctx) {
+        /** 
+         * use the application context as suggested by CommonsWare.
+         * this will ensure that you dont accidentally leak an Activitys
+         * context (see this article for more information: 
+         * http://developer.android.com/resources/articles/avoiding-memory-leaks.html)
+         */
+        if (mInstance == null) {
+            mInstance = new MySQLiteHelper(ctx.getApplicationContext());
+        }
+        return mInstance;
+    }
+    
+	private MySQLiteHelper(Context context) {
 		super(context, DATABASE_NAME, null, DATABASE_VERSION);
 	}
 

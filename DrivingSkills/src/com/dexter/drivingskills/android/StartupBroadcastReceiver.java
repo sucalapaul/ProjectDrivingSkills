@@ -18,8 +18,8 @@ public class StartupBroadcastReceiver extends BroadcastReceiver {
 	 */
 	@Override
 	public void onReceive(Context context, Intent intent) {
-		Intent startServiceIntent = new Intent(context, BluetoothChatService.class);
-		context.startService(startServiceIntent);
+//		Intent startServiceIntent = new Intent(context, BluetoothChatService.class);
+//		context.startService(startServiceIntent);
 	}
 
 }

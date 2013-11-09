@@ -67,6 +67,10 @@ public class LazyAdapter extends BaseAdapter {
         TextView speed_details = (TextView)vi.findViewById(R.id.trip_speed_details);
         TextView throttle_details = (TextView)vi.findViewById(R.id.trip_throttle_details);
         
+        View brake_bullet = (View)vi.findViewById(R.id.trip_brake_bullet);
+        View speed_bullet = (View)vi.findViewById(R.id.trip_speed_bullet);
+        View throttle_bullet = (View)vi.findViewById(R.id.trip_throttle_bullet);
+         
         Trip trip = data.get(position);
         
         String asd = Trip.DRIVE[Trip.DRIVE_KEEN];
@@ -81,6 +85,64 @@ public class LazyAdapter extends BaseAdapter {
         brake_details.setText( trip.getBrakeTypeString() );
         speed_details.setText( trip.getSpeedTypeString() );
         throttle_details.setText( trip.getThrottleTypeString() );
+        
+        // TODO: Choose bullet color
+        // CA LA TARAAAA!!! :@)
+        switch(trip.getBrakeType()) {
+	        case Trip.BRAKE_EASY:
+	        	brake_bullet.setBackgroundDrawable( vi.getResources().getDrawable(R.drawable
+	        			.circle_green));
+	        	break;
+	        	
+	        case Trip.BRAKE_MEDIUM:
+	        	brake_bullet.setBackgroundDrawable( vi.getResources().getDrawable(R.drawable
+	        			.circle_yellow));
+	        	break;
+	        
+	        case Trip.BRAKE_HARD:
+	        	brake_bullet.setBackgroundDrawable( vi.getResources().getDrawable(R.drawable
+	        			.circle_red));
+	        	break;
+        }
+
+        
+        switch(trip.getSpeedType()) {
+	        case Trip.SPEED_NORMAL:
+	        	speed_bullet.setBackgroundDrawable( vi.getResources().getDrawable(R.drawable
+	        			.circle_green));
+	        	break;
+	        	
+	        case Trip.SPEED_UNDER:
+	        	speed_bullet.setBackgroundDrawable( vi.getResources().getDrawable(R.drawable
+	        			.circle_yellow));
+	        	break;
+	        
+	        case Trip.SPEED_OVER:
+	        	speed_bullet.setBackgroundDrawable( vi.getResources().getDrawable(R.drawable
+	        			.circle_red));
+	        	break;
+        }
+
+        
+        switch(trip.getThrottleType()) {
+	        case Trip.THROTTLE_EASY:
+	        	throttle_bullet.setBackgroundDrawable( vi.getResources().getDrawable(R.drawable
+	        			.circle_green));
+	        	break;
+	        	
+	        case Trip.THROTTLE_MEDIUM:
+	        	throttle_bullet.setBackgroundDrawable( vi.getResources().getDrawable(R.drawable
+	        			.circle_yellow));
+	        	break;
+	        
+	        case Trip.THROTTLE_HARD:
+	        	throttle_bullet.setBackgroundDrawable( vi.getResources().getDrawable(R.drawable
+	        			.circle_red));
+	        	break;
+        }
+        
+        
+        
         return vi;
     }
 }

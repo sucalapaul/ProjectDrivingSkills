@@ -34,11 +34,17 @@ public class TripsDataSource {
 			MySQLiteHelper.TRIP_SPEED_TYPE,
 			MySQLiteHelper.TRIP_THROTTLE_TYPE,
 			MySQLiteHelper.TRIP_DRIVING_TYPE,
+			MySQLiteHelper.TRIP_SCORE,
 	};
+	
+	public double total_distance;
+	public long total_time;
+	public double total_score;
+	public double total_price;
 
 
 	public TripsDataSource(Context context) {
-		dbHelper = new MySQLiteHelper(context);
+		dbHelper = MySQLiteHelper.getInstance(context);
 	}
 
 	public void open() throws SQLException {
@@ -50,6 +56,20 @@ public class TripsDataSource {
 	}
 
 	//I Hate this Manual Work!!!!
+	/**
+	 * 
+	 * @param startLocation
+	 * @param endLocation
+	 * @param startTime
+	 * @param endTime
+	 * @param distance
+	 * @param price
+	 * @param brakeType
+	 * @param speedType
+	 * @param throttleType
+	 * @param drivingType
+	 * @return
+	 */
 	public Trip createTrip(
 			 String 	startLocation,
 			 String		endLocation,
@@ -60,7 +80,8 @@ public class TripsDataSource {
 			 int		brakeType,
 			 int 		speedType,
 			 int		throttleType,
-			 int		drivingType) {
+			 int		drivingType,
+			 double		score) {
 		ContentValues values = new ContentValues();
 		values.put(MySQLiteHelper.TRIP_START_LOCATION, startLocation);
 		values.put(MySQLiteHelper.TRIP_END_LOCATION, endLocation);
@@ -72,6 +93,7 @@ public class TripsDataSource {
 		values.put(MySQLiteHelper.TRIP_SPEED_TYPE, speedType);
 		values.put(MySQLiteHelper.TRIP_THROTTLE_TYPE, throttleType);
 		values.put(MySQLiteHelper.TRIP_DRIVING_TYPE, drivingType);
+		values.put(MySQLiteHelper.TRIP_SCORE, score);
 
 		long insertId = database.insert(MySQLiteHelper.TABLE_TRIPS, null,
 				values);
@@ -96,15 +118,34 @@ public class TripsDataSource {
 		List<Trip> trips = new ArrayList<Trip>();
 
 		Cursor cursor = database.query(MySQLiteHelper.TABLE_TRIPS,
-				allColumns, null, null, null, null, null);
+				allColumns, null, null, null, null, MySQLiteHelper.TRIP_ID + " DESC");
 
+		total_distance = 0;
+		total_time = 0;
+		total_score = 0;
+		total_price = 0;
+		int count = 0;
+		
 		cursor.moveToFirst();
 		while (!cursor.isAfterLast()) {
 			Trip trip = cursorToTrip(cursor);
+			count ++;
+			total_distance 	+= trip.getDistance();
+			total_time 		+= ( trip.getEndTime() - trip.getStartTime() );
+			total_score		+= trip.getScore();
+			total_price		+= trip.getPrice();
+			
 			trips.add(trip);
 			cursor.moveToNext();
 		}
 
+		if (count == 0){
+			total_score = 0;
+		}
+		else {
+			total_score = total_score / count;
+		}
+		
 		cursor.close();
 		return trips;
 	}
@@ -123,6 +164,7 @@ public class TripsDataSource {
 		trip.setSpeedType	(c.getInt		( c.getColumnIndex( MySQLiteHelper.TRIP_SPEED_TYPE )));
 		trip.setThrottleType(c.getInt		( c.getColumnIndex( MySQLiteHelper.TRIP_THROTTLE_TYPE )));
 		trip.setDrivingType	(c.getInt		( c.getColumnIndex( MySQLiteHelper.TRIP_DRIVING_TYPE )));
+		trip.setScore		(c.getInt		( c.getColumnIndex( MySQLiteHelper.TRIP_SCORE )));
 
 		return trip;
 	}

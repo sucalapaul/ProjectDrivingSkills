@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Random;
+import java.util.concurrent.TimeUnit;
 
 import android.os.Bundle;
 import android.app.Activity;
@@ -29,6 +30,11 @@ import com.dexter.drivingskills.android.data.TripsDataSource;
 public class StatisticsActivity extends Activity {
 	
 	ListView list;
+	TextView mTotalDistanceText;
+	TextView mTotalTimeText;
+	TextView mTotalPriceText;
+	TextView mScoreText;
+	
 	LazyAdapter adapter;
 	private TripsDataSource datasource;
 
@@ -37,16 +43,30 @@ public class StatisticsActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_statistics);
 		
-		list=(ListView)findViewById(R.id.list);
-		
 		datasource = new TripsDataSource(this);
 	    datasource.open();
+	    
+		//get UI elememts
+		list=(ListView)findViewById(R.id.list);
+		mTotalDistanceText = (TextView)findViewById(R.id.week_distance);
+		mTotalTimeText = (TextView)findViewById(R.id.week_time);
+		//TODO: price <-> cost ????
+		mTotalPriceText = (TextView)findViewById(R.id.week_cost);
+		mScoreText = (TextView)findViewById(R.id.week_score);
 	    
 	    //Fetch trips from database and add them to ListView
 	    List<Trip> tripsList = datasource.getAllTrips();
         adapter=new LazyAdapter(this, tripsList);
         list.setAdapter(adapter);
- 
+        
+        mTotalDistanceText.setText( String.format("%.1f", datasource.total_distance) );
+        long seconds = datasource.total_time;
+        int hours = (int) (seconds / 3600);
+        int minutes = ((int) (seconds / 60)) % 60;
+        mTotalTimeText.setText( String.format("%d:%02d",hours, minutes) );
+        mTotalPriceText.setText( String.format("%.1f", datasource.total_price) );
+        mScoreText.setText( String.format("%.1f", datasource.total_score) );
+        
         // Click event for single list row
         list.setOnItemClickListener(new OnItemClickListener() {
 
@@ -77,11 +97,12 @@ public class StatisticsActivity extends Activity {
 						now,
 						now,
 						distance,
-						distance * 6.3,
-						Trip.BRAKE_HARD, 
-						Trip.SPEED_NORMAL,
-						Trip.THROTTLE_HARD, 
-						Trip.DRIVE_AGGRESSIVE);
+						distance * 0.42,
+						rand.nextInt(3), 
+						rand.nextInt(3), 
+						rand.nextInt(3),  
+						rand.nextInt(5), 
+						rand.nextDouble()*10);
 			}
 		});
 	}

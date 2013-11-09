@@ -143,6 +143,7 @@
                 android:orientation="horizontal" >
 
                 <View
+                    android:id="@+id/trip_brake_bullet"
                     android:layout_width="22dp"
                     android:layout_height="22dp"
                     android:layout_margin="5dp"
@@ -166,6 +167,7 @@
                 android:orientation="horizontal" >
 
                 <View
+                    android:id="@+id/trip_speed_bullet"
                     android:layout_width="22dp"
                     android:layout_height="22dp"
                     android:layout_margin="5dp"
@@ -180,7 +182,6 @@
                     android:textColor="@color/darkgray"
                     android:textSize="10sp" />
             </LinearLayout>
-
             <!-- Throttle details -->
             <LinearLayout
                 android:layout_width="0dp"
@@ -189,6 +190,7 @@
                 android:orientation="horizontal" >
 
                 <View
+                    android:id="@+id/trip_throttle_bullet"
                     android:layout_width="22dp"
                     android:layout_height="22dp"
                     android:layout_margin="5dp"
