@@ -459,12 +459,7 @@ public class BluetoothChatService extends Service {
             mmOutStream = tmpOut;
         }
         
-        //>TODO: Remove duplicate try-catch
-        public void run_loop() {
-        	mCarParameters = new CarParameters();
-        	mCarParameters.setConnectionStatus(mState);
-        	
-        	
+        private void resetAdapter() {
         	ObdBaseCommand commandReset = new ObdResetCommand();
         	ObdBaseCommand commandEchoOff = new EchoOffObdCommand();
         	ObdBaseCommand commandLineFeedOff = new LineFeedOffObdCommand();
@@ -486,6 +481,15 @@ public class BluetoothChatService extends Service {
 				Log.e(TAG, "Interrupted exception", e);
 				connectionLost();
     		}
+        }
+        
+        //>TODO: Remove duplicate try-catch
+        public void run_loop() {
+        	mCarParameters = new CarParameters();
+        	mCarParameters.setConnectionStatus(mState);
+        	
+        	resetAdapter();
+
         	
     		// Poll car data
     		// Loop will end when the connection is lost
@@ -513,6 +517,10 @@ public class BluetoothChatService extends Service {
         		mCarParameters.setSpeed( commandSpeed.getParsedResult() );
         		mCarParameters.setRpm( commandRPM.getParsedResult() );
         		mCarParameters.setThrottle( commandThrottle.getParsedResult() );
+        		
+        		if (mCarParameters.getRetryCount() > 4){
+        			resetAdapter();
+        		}
         		
         		//TODO: Hackish; when the trip is done?
         		if (mCarParameters.isEngineON() == false && mCarParameters.getDistance() > 0.1){

@@ -17,7 +17,7 @@
 
 <resources>
 
-    <string name="app_name">Driving Skills</string>
+    <string name="app_name">Black Box</string>
 
     <!-- BluetoothChat -->
     <string name="send">Send</string>

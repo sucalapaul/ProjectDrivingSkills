@@ -30,6 +30,7 @@ public class CarParameters implements Cloneable {
 	private double score;
 	
 	private int connectionStatus;
+	private int retryCount;
 	
 	private String status = "";
 	
@@ -50,6 +51,7 @@ public class CarParameters implements Cloneable {
 		created_at 	 = System.currentTimeMillis() / 1000;
 		trip = new Trip();
 		connectionStatus = 0;
+		retryCount = 0;
 	}
 
 	/**
@@ -156,6 +158,9 @@ public class CarParameters implements Cloneable {
 		
 		if (speed != -1) {
 			isRecording = true;
+			retryCount = 0;
+		} else {
+			retryCount++;
 		}
 	}
 	
@@ -283,6 +288,10 @@ public class CarParameters implements Cloneable {
     protected Object clone() throws CloneNotSupportedException {
         return super.clone();
     }
+
+	public int getRetryCount() {
+		return retryCount;
+	}
 
 
 }
